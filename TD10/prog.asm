@@ -1,5 +1,5 @@
                 SEUIL EQU 3
-                INA EQU 0xFFA0    // Il faut modifier FFA0 dans l’IHM pour modifier la valeur d’input
+                INA EQU 0xFF00    // Il faut modifier FFA0 dans l’IHM pour modifier la valeur d’input
                 OUTA EQU 0xFFA2
                 RESET_ADDRESS EQU 0xFFE4
                 LOADA EQU 0xFF10  // Début du programme, si overflow il faut la remontée

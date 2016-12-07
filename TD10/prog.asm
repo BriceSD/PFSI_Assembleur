@@ -9,9 +9,10 @@
                 ORG LOADA
                 START LOADA
 
-                LDW SP, #STACKA
+                LDW @SP, #STACKA
 DEBUT           LDW R2,@INA     // On load IN (x) dans R2
                 LDW R1,#SEUIL   // On load le seuil de ?? dans R1
+                JSR @PUSH
                 JSR @DISTA
                 // ⇒ On vient de faire une division par 2 de R0, que l’on stock dans R0
                 STW R0,@OUTA    // Puis on stocke le résultat dans OUTA
@@ -21,4 +22,13 @@ DISTA           SUB R2,R1,R0    // On soustrait R1 à R0. R0 = R1-R0
                 JGE #POSIT-$-2  // Si le résultat de la soustraction est < 0, Sinon on passe directement au SR (division)
                 NEG R0,R0       //    On fait le complément de R0 dans R0 (car on veut la val absolue), Puis on passe à la division
 POSIT           SRA R0,R0       // On fait un SR arithmétique
+                JSR @POP
+                RTS
+
+PUSH            SUB @SP,#2,@SP    //Subroutine PUSH
+                STW R1,(@SP)
+                RTS
+
+POP             LDW (@SP),R1     //Subroutine POP
+                ADQ @SP,#2,@SP
                 RTS

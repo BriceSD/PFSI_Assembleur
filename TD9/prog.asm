@@ -16,5 +16,4 @@ DEBUT           LDW R0,@INA     // On load IN dans R0
 POSIT           SRA R0,R0       // On fait un SR arithmétique
                                 // ⇒ On vient de faire une division par 2 de R0, que l’on stock dans R0
                 STW R0,@OUTA    // Puis on stocke le résultat dans OUTA
-
                 JMP #DEBUT-$-2  // On recommence la boucle

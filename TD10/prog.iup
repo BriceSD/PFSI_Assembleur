@@ -3,18 +3,20 @@ ff10  debut d'execution
 6f80   emplacement : 65296  (0xff10)  ligne n° 12	                LDW SP, #STACKA
 1000   emplacement : 65298  (0xff12) 
 62d0   emplacement : 65300  (0xff14)  ligne n° 13	DEBUT           LDW R2,@INA     // On load IN (x) dans R2
-ffa0   emplacement : 65302  (0xff16) 
+ff00   emplacement : 65302  (0xff16) 
 6180   emplacement : 65304  (0xff18)  ligne n° 14	                LDW R1,#SEUIL   // On load le seuil de ?? dans R1
 0003   emplacement : 65306  (0xff1a) 
-0a50   emplacement : 65308  (0xff1c)  ligne n° 15	                JSR @DISTA
-ff28   emplacement : 65310  (0xff1e) 
-6050   emplacement : 65312  (0xff20)  ligne n° 17	                STW R0,@OUTA    // Puis on stocke le risultat dans OUTA
-ffa2   emplacement : 65314  (0xff22) 
-0180   emplacement : 65316  (0xff24)  ligne n° 18	                JMP #DEBUT-$-2  // On recommence la boucle
-ffee   emplacement : 65318  (0xff26) 
-f210   emplacement : 65320  (0xff28)  ligne n° 20	DISTA           SUB R2,R1,R0    // On soustrait R1 ` R0. R0 = R1-R0
-0480   emplacement : 65322  (0xff2a)  ligne n° 21	                JGE #POSIT-$-2  // Si le risultat de la soustraction est < 0, Sinon on passe directement au SR (division)
-0004   emplacement : 65324  (0xff2c) 
-4700   emplacement : 65326  (0xff2e)  ligne n° 22	                NEG R0,R0       //    On fait le compliment de R0 dans R0 (car on veut la val absolue), Puis on passe ` la division
-4300   emplacement : 65328  (0xff30)  ligne n° 23	POSIT           SRA R0,R0       // On fait un SR arithmitique
-0200   emplacement : 65330  (0xff32)  ligne n° 24	                RTS
+614f   emplacement : 65308  (0xff1c)  ligne n° 15	                STW R1, -(SP)   // PUSH R1
+0a50   emplacement : 65310  (0xff1e)  ligne n° 16	                JSR @DISTA
+ff2a   emplacement : 65312  (0xff20) 
+6050   emplacement : 65314  (0xff22)  ligne n° 18	                STW R0,@OUTA    // Puis on stocke le risultat dans OUTA
+ffa2   emplacement : 65316  (0xff24) 
+0180   emplacement : 65318  (0xff26)  ligne n° 19	                JMP #DEBUT-$-2  // On recommence la boucle
+ffec   emplacement : 65320  (0xff28) 
+f210   emplacement : 65322  (0xff2a)  ligne n° 21	DISTA           SUB R2,R1,R0    // On soustrait R1 ` R0. R0 = R1-R0
+0480   emplacement : 65324  (0xff2c)  ligne n° 22	                JGE #POSIT-$-2  // Si le risultat de la soustraction est < 0, Sinon on passe directement au SR (division)
+0004   emplacement : 65326  (0xff2e) 
+4700   emplacement : 65328  (0xff30)  ligne n° 23	                NEG R0,R0       //    On fait le compliment de R0 dans R0 (car on veut la val absolue), Puis on passe ` la division
+4300   emplacement : 65330  (0xff32)  ligne n° 24	POSIT           SRA R0,R0       // On fait un SR arithmitique
+61bf   emplacement : 65332  (0xff34)  ligne n° 25	                LDW R1,(SP)+    // POP R1
+0200   emplacement : 65334  (0xff36)  ligne n° 26	                RTS
